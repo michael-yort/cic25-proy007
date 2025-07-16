@@ -1,13 +1,10 @@
 package es.cic.curso25.proy007.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import es.cic.curso25.proy007.model.Bombilla;
 import es.cic.curso25.proy007.service.BombillaService;
 
@@ -18,18 +15,33 @@ public class BombillaController {
     @Autowired
     private BombillaService service;
 
+    // ✅ Listar todas las bombillas
     @GetMapping
-    public List<Bombilla> listarBombillas() {
+    public List<Bombilla> listar() {
         return service.listarBombillas();
     }
 
+    // ✅ Ver una bombilla por ID
+    @GetMapping("/{id}")
+    public Bombilla verPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
+    // ✅ Crear nueva bombilla
+    @PostMapping
+    public long crear(@RequestBody Bombilla bombilla) {
+        return service.create(bombilla);
+    }
+
+    // ✅ Cambiar estado (toggle)
     @PostMapping("/{id}/toggle")
     public Bombilla toggle(@PathVariable Long id) {
         return service.toggle(id);
     }
 
+    // ✅ Eliminar una bombilla
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void eliminar(@PathVariable Long id) {
         service.delete(id);
     }
 }

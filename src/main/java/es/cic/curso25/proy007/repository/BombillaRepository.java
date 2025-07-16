@@ -1,10 +1,6 @@
 package es.cic.curso25.proy007.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,15 +11,17 @@ public class BombillaRepository {
 
     private Map<Long, Bombilla> bombillas = new HashMap<>();
 
-    public long create(Bombilla bombilla) {
-        long id = getNextId();
-        bombilla.setId(id);
-        bombilla.setEncendida(false); // Apagada por defecto
-        bombillas.put(id, bombilla);
-        return id;
+    public BombillaRepository() {
+        // ✅ Inicializamos 3 bombillas al iniciar la app
+        Bombilla b1 = new Bombilla(1L, 60, "LED", false);
+        Bombilla b2 = new Bombilla(2L, 75, "Halógena", false);
+        Bombilla b3 = new Bombilla(3L, 100, "Incandescente", false);
+
+        bombillas.put(1L, b1);
+        bombillas.put(2L, b2);
+        bombillas.put(3L, b3);
     }
 
-  
     public List<Bombilla> listarBombillas() {
         return new ArrayList<>(bombillas.values());
     }
@@ -40,9 +38,17 @@ public class BombillaRepository {
         bombillas.put(bombilla.getId(), bombilla);
     }
 
+    // ⚠️ Este método ahora empieza en el último ID usado (3) + 1
     private long getNextId() {
-       
         return bombillas.keySet().stream().max(Long::compare).orElse(0L) + 1;
     }
 
+    // Si aún quieres permitir crear más bombillas manualmente:
+    public long create(Bombilla bombilla) {
+        long id = getNextId();
+        bombilla.setId(id);
+        bombilla.setEncendida(false); // Apagada por defecto
+        bombillas.put(id, bombilla);
+        return id;
+    }
 }

@@ -22,6 +22,11 @@ public class BombillaService {
         return repo.listarBombillas();
     }
 
+    public Bombilla buscarPorId(Long id) {
+        return repo.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("No existe la bombilla con ID " + id));
+    }
+
     public Bombilla toggle(Long id) {
         Bombilla b = repo.buscarPorId(id).orElseThrow(() -> new RuntimeException("No existe la bombilla " + id));
         b.setEncendida(!b.isEncendida());
