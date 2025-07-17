@@ -1,10 +1,17 @@
 package es.cic.curso25.proy007.model;
 
-public class Bombilla {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Bombilla {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int potencia; // En watts
-    private String tipo; // "LED", "Halogena"
+    private String tipo = "LED"; // "LED", "Halogena"
     private boolean encendida;
 
     public Bombilla() {
