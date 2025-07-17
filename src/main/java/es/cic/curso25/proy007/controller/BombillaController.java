@@ -1,10 +1,8 @@
 package es.cic.curso25.proy007.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import es.cic.curso25.proy007.model.Bombilla;
 import es.cic.curso25.proy007.service.BombillaService;
 
@@ -33,8 +31,8 @@ public class BombillaController {
         return service.create(bombilla);
     }
 
-    // Encender o apagar la bombilla   SOLO FUNCIONA DESDE LINEA DE COMANDOS curl -X POST http://localhost:8080/bombilla/1/toggle
-
+    // Encender o apagar la bombilla SOLO FUNCIONA DESDE LINEA DE COMANDOS curl -X
+    // POST http://localhost:8080/bombilla/1/toggle
     @PostMapping("/{id}/toggle")
     public Bombilla toggle(@PathVariable Long id) {
         return service.toggle(id);

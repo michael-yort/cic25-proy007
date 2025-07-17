@@ -4,7 +4,7 @@ public class Bombilla {
 
     private Long id;
     private int potencia; // En watts
-    private String tipo; // "LED", "Halogena"
+    private String tipo="LED"; // "LED", "Halogena"
     private boolean encendida;
 
     public Bombilla() {
