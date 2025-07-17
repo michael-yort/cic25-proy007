@@ -4,13 +4,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.cic.curso25.proy007.model.Bombilla;
-import es.cic.curso25.proy007.repository.BombillaRepository;
+import es.cic.curso25.proy007.repository.BombillaRepositoryImpl;
 
 @Service
 public class BombillaService {
 
     @Autowired
-    private BombillaRepository repo;
+    private BombillaRepositoryImpl repo;
 
     public long create(Bombilla bombilla) {
         return repo.create(bombilla);
