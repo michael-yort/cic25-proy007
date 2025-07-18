@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,13 +38,20 @@ public class BombillaServiceIntegrationTest {
     }
 
     @Test
-    @Disabled
     void testDelete() {
-        bombillaService.delete(3L);
+        List<Bombilla> bombillasIniciales = bombillaService.listarBombillas();
+        Bombilla bombilla = new Bombilla();
+        Bombilla bombilla2 = new Bombilla();
+        bombillaService.create(bombilla);
+        bombillaService.create(bombilla2);
+        
+        long id = bombilla.getId();
+        bombillaService.delete(id);
+
         List<Bombilla> bombillas = bombillaService.listarBombillas();
         long longitud = bombillas.size();
 
-        assertEquals(2, longitud);
+        assertEquals(bombillasIniciales.size() + 1, longitud);
     }
 
     @Test
